@@ -1,11 +1,12 @@
-import Discord, { Message } from "discord.js";
+import { Message, VoiceConnection } from "discord.js";
+import * as Discord from "discord.js";
 import { prefix, token, channel, meds } from "./config.json";
-import ytdl from "ytdl-core";
+import * as ytdl from "ytdl-core";
 
 const client = new Discord.Client();
 client.login(token);
 
-let connection;
+let connection: VoiceConnection;
 
 client.once("ready", () => {
     client.user.setPresence({
@@ -20,7 +21,29 @@ client.once("disconnect", () => {
     console.log("Disconnected.");
 });
 
-async function play(time, message: Message) {
+client.on("message", async (message: Message) => {
+    console.log("here");
+    if (message.author.bot) return;
+    if (!message.content.startsWith(prefix)) return;
+    if (!(message.member.voice.channelID == channel)) return;
+    console.log(prefix);
+
+    console.log(message.content);
+
+    if (message.content.startsWith(`${prefix} 10`)) {
+        console.log("pog");
+        play(10, message);
+        return;
+    } else if (message.content.startsWith(`${prefix} 20`)) {
+        play(20, message);
+        return;
+    } else if (message.content.startsWith(`${prefix} 30`)) {
+        play(30, message);
+        return;
+    }
+});
+
+const play = async (time: number, message: Message) => {
     const voiceChannel = message.member.voice;
     console.log(voiceChannel);
     if (!voiceChannel)
@@ -63,26 +86,4 @@ async function play(time, message: Message) {
             console.log(err);
         }
     }
-}
-
-client.on("message", async (message) => {
-    console.log("here");
-    if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return;
-    if (!(message.member.voice.channelID == channel)) return;
-    console.log(prefix);
-
-    console.log(message.content);
-
-    if (message.content.startsWith(`${prefix} 10`)) {
-        console.log("pog");
-        play(10, message);
-        return;
-    } else if (message.content.startsWith(`${prefix} 20`)) {
-        play(20, message);
-        return;
-    } else if (message.content.startsWith(`${prefix} 30`)) {
-        play(30, message);
-        return;
-    }
-});
+};
