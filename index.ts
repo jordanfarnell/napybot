@@ -22,13 +22,11 @@ client.once("disconnect", () => {
 });
 
 client.on("message", async (message: Message) => {
-    console.log("here");
     if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return;
+    if (!message.content.startsWith(prefix) && !message.content.startsWith("-"))
+        return;
+    if (message.content.startsWith(`-wadu`)) message.channel.send("hek!");
     if (!(message.member.voice.channelID == channel)) return;
-    console.log(prefix);
-
-    console.log(message.content);
 
     if (message.content.startsWith(`${prefix} 10`)) {
         console.log("pog");
