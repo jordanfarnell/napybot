@@ -11,7 +11,7 @@ let connection: VoiceConnection;
 client.once("ready", () => {
     client.user.setPresence({
         activity: {
-            name: "napyplace"
+            name: "discord.gg/jWNkZ2"
         }
     });
     console.log("Ready.");
