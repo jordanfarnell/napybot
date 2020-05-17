@@ -26,12 +26,13 @@ async function play(time, message: Message) {
     if (!voiceChannel)
         message.channel.send("You must be in the meditation voice channel.");
     if (connection) {
-        message.channel.send("Please wait for the meditation to finish uwu.");
+        message.channel.send("Please wait for the meditation to finish.");
         return;
     }
     if (time === 10) {
         try {
             connection = await voiceChannel.channel.join();
+            message.channel.send("Starting 10 minute meditation.");
             const dispatcher = connection.play(ytdl(meds[0])).on("end", () => {
                 connection = undefined;
             });
@@ -42,6 +43,7 @@ async function play(time, message: Message) {
     } else if (time === 20) {
         try {
             connection = await voiceChannel.channel.join();
+            message.channel.send("Starting 20 minute meditation.");
             const dispatcher = connection.play(ytdl(meds[1])).on("end", () => {
                 connection = undefined;
             });
@@ -52,6 +54,7 @@ async function play(time, message: Message) {
     } else if (time === 30) {
         try {
             connection = await voiceChannel.channel.join();
+            message.channel.send("Starting 30 minute meditation.");
             const dispatcher = connection.play(ytdl(meds[2])).on("end", () => {
                 connection = undefined;
             });
