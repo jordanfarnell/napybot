@@ -1,11 +1,6 @@
-const Discord = require("discord.js");
-const {
-    prefix,
-    token,
-    channel,
-    meds
-} = require("./config.json");
-const ytdl = require("ytdl-core");
+import Discord, { Message } from "discord.js";
+import { prefix, token, channel, meds } from "./config.json";
+import ytdl from "ytdl-core";
 
 const client = new Discord.Client();
 client.login(token);
@@ -14,27 +9,22 @@ let connection;
 
 client.once("ready", () => {
     client.user.setPresence({
-        game: {
-            name: "napyplace",
-            type: "Cringing",
-            url: "https://discord.gg/jWNkZ2"
+        activity: {
+            name: "napyplace"
         }
     });
     console.log("Ready.");
-});
-
-client.once("reconnecting", () => {
-    console.log("Trying to reconnect.");
 });
 
 client.once("disconnect", () => {
     console.log("Disconnected.");
 });
 
-async function play(time, message) {
+async function play(time, message: Message) {
     const voiceChannel = message.member.voice;
     console.log(voiceChannel);
-    if (!voiceChannel) message.channel.send("You must be in the meditation voice channel.");
+    if (!voiceChannel)
+        message.channel.send("You must be in the meditation voice channel.");
     if (connection) {
         message.channel.send("Please wait for the meditation to finish uwu.");
         return;
@@ -42,10 +32,9 @@ async function play(time, message) {
     if (time === 10) {
         try {
             connection = await voiceChannel.channel.join();
-            const dispatcher = connection.play(ytdl(meds[0]))
-                .on("end", () => {
-                    connection = undefined;
-                });
+            const dispatcher = connection.play(ytdl(meds[0])).on("end", () => {
+                connection = undefined;
+            });
             dispatcher.setVolumeLogarithmic(0.5);
         } catch (err) {
             console.log(err);
@@ -53,10 +42,9 @@ async function play(time, message) {
     } else if (time === 20) {
         try {
             connection = await voiceChannel.channel.join();
-            const dispatcher = connection.play(ytdl(meds[1]))
-                .on("end", () => {
-                    connection = undefined;
-                });
+            const dispatcher = connection.play(ytdl(meds[1])).on("end", () => {
+                connection = undefined;
+            });
             dispatcher.setVolumeLogarithmic(0.5);
         } catch (err) {
             console.log(err);
@@ -64,10 +52,9 @@ async function play(time, message) {
     } else if (time === 30) {
         try {
             connection = await voiceChannel.channel.join();
-            const dispatcher = connection.play(ytdl(meds[2]))
-                .on("end", () => {
-                    connection = undefined;
-                });
+            const dispatcher = connection.play(ytdl(meds[2])).on("end", () => {
+                connection = undefined;
+            });
             dispatcher.setVolumeLogarithmic(0.5);
         } catch (err) {
             console.log(err);
@@ -75,7 +62,7 @@ async function play(time, message) {
     }
 }
 
-client.on("message", async message => {
+client.on("message", async (message) => {
     console.log("here");
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
