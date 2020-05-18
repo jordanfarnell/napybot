@@ -11,7 +11,7 @@ let connection: VoiceConnection;
 client.once("ready", () => {
     client.user.setPresence({
         activity: {
-            name: "discord.gg/jWNkZ2"
+            name: "discord.gg/jWNkZ2 | twitch.tv/zzznapy"
         }
     });
     console.log("Ready.");
