@@ -54,9 +54,12 @@ const play = async (time: number, message: Message) => {
         try {
             connection = await voiceChannel.channel.join();
             message.channel.send("Starting 10 minute meditation.");
-            const dispatcher = connection.play(ytdl(meds[0])).on("end", () => {
-                connection = undefined;
-            });
+            const dispatcher = connection
+                .play(ytdl(meds[0]))
+                .on("finish", () => {
+                    connection.channel.leave();
+                    connection = undefined;
+                });
             dispatcher.setVolumeLogarithmic(0.5);
         } catch (err) {
             console.log(err);
@@ -65,9 +68,12 @@ const play = async (time: number, message: Message) => {
         try {
             connection = await voiceChannel.channel.join();
             message.channel.send("Starting 20 minute meditation.");
-            const dispatcher = connection.play(ytdl(meds[1])).on("end", () => {
-                connection = undefined;
-            });
+            const dispatcher = connection
+                .play(ytdl(meds[1]))
+                .on("finish", () => {
+                    connection.channel.leave();
+                    connection = undefined;
+                });
             dispatcher.setVolumeLogarithmic(0.5);
         } catch (err) {
             console.log(err);
@@ -76,9 +82,12 @@ const play = async (time: number, message: Message) => {
         try {
             connection = await voiceChannel.channel.join();
             message.channel.send("Starting 30 minute meditation.");
-            const dispatcher = connection.play(ytdl(meds[2])).on("end", () => {
-                connection = undefined;
-            });
+            const dispatcher = connection
+                .play(ytdl(meds[2]))
+                .on("finish", () => {
+                    connection.channel.leave();
+                    connection = undefined;
+                });
             dispatcher.setVolumeLogarithmic(0.5);
         } catch (err) {
             console.log(err);
