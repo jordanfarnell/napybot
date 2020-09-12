@@ -32,8 +32,10 @@ client.on("message", async (message: Message) => {
     if (message.author.bot) return;
     if (message.channel.id === "697999380791296050") {
         if (message.content.toLowerCase().includes("clips.twitch.tv")) {
+            console.log("message is twitch clip");
             return;
         } else {
+            console.log("not twitch clip");
             message.delete();
             message.author.send("Please only post twitch clips in the `twitch-clips` channel 🤡");
             return;
