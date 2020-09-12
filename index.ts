@@ -9,11 +9,13 @@ client.login(token);
 let connection: VoiceConnection;
 
 client.once("ready", () => {
-    client.user.setPresence({
-        activity: {
-            name: "discord.gg/xcu8uXk | twitch.tv/zzznapy"
-        }
-    });
+    setTimeout(() => {
+        client.user.setPresence({
+            activity: {
+                name: "discord.gg/xcu8uXk"
+            }
+        });
+    }, 60000);
     console.log("Ready.");
 });
 
@@ -23,13 +25,19 @@ client.once("disconnect", () => {
 
 client.on("message", async (message: Message) => {
     if (message.author.bot) return;
+    if (message.channel.id === "754410445946748998") {
+        if (message.content.toLowerCase().includes("clips.twitch.tv")) {
+            return;
+        }
+        message.delete();
+        return;
+    }
     if (!message.content.startsWith(prefix) && !message.content.startsWith("-"))
         return;
     if (message.content.startsWith(`-wadu`)) message.channel.send("hek!");
     if (!(message.member.voice.channelID == channel)) return;
 
     if (message.content.startsWith(`${prefix} 10`)) {
-        console.log("pog");
         play(10, message);
         return;
     } else if (message.content.startsWith(`${prefix} 20`)) {
