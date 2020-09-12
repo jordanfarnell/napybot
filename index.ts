@@ -9,6 +9,11 @@ client.login(token);
 let connection: VoiceConnection;
 
 client.once("ready", () => {
+    client.user.setPresence({
+        activity: {
+            name: "discord.gg/xcu8uXk"
+        }
+    });
     setTimeout(() => {
         client.user.setPresence({
             activity: {
@@ -28,10 +33,11 @@ client.on("message", async (message: Message) => {
     if (message.channel.id === "697999380791296050") {
         if (message.content.toLowerCase().includes("clips.twitch.tv")) {
             return;
+        } else {
+            message.delete();
+            message.author.send("Please only post twitch clips in the `twitch-clips` channel 🤡");
+            return;
         }
-        message.delete();
-        message.author.send("Please only post twitch clips in the `twitch-clips` channel 🤡");
-        return;
     }
     if (!message.content.startsWith(prefix) && !message.content.startsWith("-"))
         return;
