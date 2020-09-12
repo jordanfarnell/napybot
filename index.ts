@@ -25,11 +25,12 @@ client.once("disconnect", () => {
 
 client.on("message", async (message: Message) => {
     if (message.author.bot) return;
-    if (message.channel.id === "754410445946748998") {
+    if (message.channel.id === "697999380791296050") {
         if (message.content.toLowerCase().includes("clips.twitch.tv")) {
             return;
         }
         message.delete();
+        message.author.send("Please only post twitch clips in `twitch-clips` thx <3");
         return;
     }
     if (!message.content.startsWith(prefix) && !message.content.startsWith("-"))
