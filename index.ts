@@ -30,7 +30,7 @@ client.on("message", async (message: Message) => {
             return;
         }
         message.delete();
-        message.author.send("Please only post twitch clips in `twitch-clips` thx <3");
+        message.author.send("Please only post twitch clips in the `twitch-clips` channel 🤡");
         return;
     }
     if (!message.content.startsWith(prefix) && !message.content.startsWith("-"))
